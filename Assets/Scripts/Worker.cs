@@ -16,8 +16,6 @@ public class Worker : MonoBehaviour
     */
 
     // Resources we need to action
-    public GameResourceSO wood;
-    public GameResourceSO chair;
     private GameResourceSO carried;
     [HideInInspector]
     public GameResourcesList resourceList;
@@ -72,10 +70,6 @@ public class Worker : MonoBehaviour
         // When false go pick up wood
         if(isCarrying == false && extractionContainer.Count > 0)
         {
-            /*
-            TO DO:
-            1. ON IT + ANMIATION gracz w każdym momencie może podejrzeć, jaki zasób aktualnie przenosi ludzik
-            */
             Extraction();
             return;
         }
@@ -125,8 +119,8 @@ public class Worker : MonoBehaviour
             {
                 resourceList = container.GetComponent<GameResourcesList>();
                 animator.SetBool("isMoving", false);
+                carried = container.GetComponent<ExtractionBuilding>().resourceSO;
 
-                carried = wood;
                 if (resourceList.TryUse(carried, 1))
                 {
                     container = null;
@@ -137,6 +131,7 @@ public class Worker : MonoBehaviour
                 else
                 {
                     Debug.Log("Waiting for wood");
+                    return;
                 }
                 
                 isCarrying = true;
@@ -189,7 +184,8 @@ public class Worker : MonoBehaviour
                 resourceList.Add(carried, 1);
                 animator.SetBool("carrying", false);
                 crate.SetActive(false);
-                carried = chair;
+                carried = container.GetComponent<ProductionBuilding>().outputResourceSO;
+
                 if (storageContainer.Count > 0 && resourceList.TryUse(carried, 1))
                 {
                     product = true;
@@ -296,7 +292,7 @@ public class Worker : MonoBehaviour
 
             string resource = carried.name;
 
-            if (Vector3.Distance(hitInfo.point, this.transform.position) <= 1.5f)
+            if (Vector3.Distance(hitInfo.point, this.transform.position) <= 1f)
             {
                 timer = 0f;
                 resourceText.text = "Worker's carrying:\r\n " + resource.Replace(" Resource", null);
