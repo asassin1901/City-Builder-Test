@@ -1,6 +1,7 @@
-# rekrutacja
- A small city builder project
- All of the necessary functionality has been implemented:
+# City-Builder-Test
+ A very small city builder project
+
+# Features
  - Workers carry one of a necessary resource
  - Navigate between buildings
  - Find the aforementioned buildings
