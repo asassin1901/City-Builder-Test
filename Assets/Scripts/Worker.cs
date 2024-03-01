@@ -7,14 +7,6 @@ using TMPro;
 
 public class Worker : MonoBehaviour
 {
-    /*
-    - pomiędzy budynkami powinien chodzić 1 ludzik, który przenosi na raz 1 jednostkę 1 zasobu
-    - gracz w każdym momencie może podejrzeć, jaki zasób aktualnie przenosi ludzik
-    - jeśli ludzik nie może wziąć zasobu z budynku wydobywczego, to powinien poczekać, aż zasób ten się wytworzy
-    - jeśli ludzik nie może wziąć zasobu z budynku produkcyjnego, to powinien zrezygnować z niego i 
-      spróbować przenieść zasób z budynku wydobywczego do produkcyjnego
-    */
-
     // Resources we need to action
     private GameResourceSO carried;
     [HideInInspector]
